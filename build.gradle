@@ -1,0 +1,57 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+}
+apply plugin: 'findbugs'
+
+findbugs {
+    toolVersion = "3.0.1"
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("${project.rootDir}/AndroidCodeQualityConfig/quality/findbugs/findbugs-filter.xml")
+}
+
+task findbugs(type: FindBugs, group: 'verification') {
+        classes = files("$projectDir.absolutePath/build/intermediates/classes")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        // FindBugs tasks can only have one report enabled
+        xml.enabled = false
+        html.enabled = !xml.enabled
+        xml {
+            destination file("$projectDir.absolutePath/build/reports/findbugs/findbugs.xml")
+        }
+        html {
+            destination file("$project.buildDir/outputs/findbugs/findbugs-output.html")
+        }
+    }
+
+    classpath = files()
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
