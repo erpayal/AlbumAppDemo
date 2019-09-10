@@ -13,4 +13,7 @@ public class CustomViewBindings {
         recyclerView.setAdapter(adapter);
     }
 
+
+
+
 }

@@ -1,7 +1,9 @@
 package com.example.albumappdemo.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.example.albumappdemo.AlbumDescpActivity;
 import com.example.albumappdemo.R;
 import com.example.albumappdemo.adapter.AlbumListAdapter;
 import com.example.albumappdemo.dao.AlbumDaoRepository;
@@ -27,6 +29,10 @@ public class AlbumListViewModel extends AndroidViewModel {
 
     private LiveData<List<AlbumList>> allAlbums;
 
+    MutableLiveData<AlbumList> albumdescpdata;
+
+    String title="";
+
     public AlbumListViewModel(Application application) {
         super(application);
         albumDaoRepository = new AlbumDaoRepository(application);
@@ -34,13 +40,37 @@ public class AlbumListViewModel extends AndroidViewModel {
         mutableLiveData = albumRepository.getAlbums();
         allAlbums = albumDaoRepository.getAllAlbums();
         albumListAdapter = new AlbumListAdapter(R.layout.album_list, this);
+        albumdescpdata=new MutableLiveData<>();
+
+
 
     }
 
-
+;
     public LiveData<List<AlbumList>> getAllAlbums
             () {
         return allAlbums;
+    }
+
+
+
+    public void getAlbumdescpdata(String id){
+        Log.e("id",id+"ee");
+
+
+        albumdescpdata.setValue(albumRepository.getAlbumDetail(id).getValue());
+
+
+    }
+
+    public MutableLiveData<AlbumList> getSelected() {
+
+        return albumdescpdata;
+    }
+
+
+    public String getTitle(){
+        return  title;
     }
 
     public void insert(List<AlbumList> album) {

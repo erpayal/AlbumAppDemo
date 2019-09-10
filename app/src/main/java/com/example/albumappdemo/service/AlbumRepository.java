@@ -54,6 +54,33 @@ public class AlbumRepository {
         return albumData;
     }
 
+    public MutableLiveData<AlbumList> getAlbumDetail(String id){
+
+        MutableLiveData<AlbumList> albumdetail=new MutableLiveData<AlbumList>();
+
+        apiService.getAlbumsDetail(id).enqueue(new Callback<AlbumList>() {
+            @Override
+            public void onResponse(Call<AlbumList> call, Response<AlbumList> response) {
+
+                if(response.isSuccessful())
+                {
+                    Log.e("responsebody",response.body().getTitle()+"eeee");
+                    albumdetail.setValue(response.body());
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AlbumList> call, Throwable t) {
+
+            }
+        });
+        return albumdetail ;
+
+    }
 
 
 }

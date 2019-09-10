@@ -1,7 +1,9 @@
 package com.example.albumappdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.albumappdemo.databinding.ActivityMainBinding;
 import com.example.albumappdemo.model.AlbumList;
@@ -53,7 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+
 
 
 }

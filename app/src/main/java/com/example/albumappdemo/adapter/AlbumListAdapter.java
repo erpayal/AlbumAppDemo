@@ -45,6 +45,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.Gene
     @Override
     public void onBindViewHolder(@NonNull GenericViewHolder holder, int position) {
         holder.bind(viewModel, position);
+
     }
 
     @Override

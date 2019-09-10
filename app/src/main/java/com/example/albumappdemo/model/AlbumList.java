@@ -56,5 +56,9 @@ public class AlbumList extends BaseObservable {
         this.title = title;
     }
 
-
+    public AlbumList(@NonNull String userId, @NonNull String id, @NonNull String title) {
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+    }
 }
